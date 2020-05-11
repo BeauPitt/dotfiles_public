@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+pulseaudio -k
+pulseaudio -D
