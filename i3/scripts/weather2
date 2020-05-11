@@ -13,7 +13,7 @@
 #!/bin/bash
 # Based on http://openweathermap.org/current
 
-API_KEY="7fc2880f043d1df3dda9459bc31ea95d"
+API_KEY="YOURAPIKEY"
 
 # Check on http://openweathermap.org/find
 CITY_ID="${BLOCK_INSTANCE}"
