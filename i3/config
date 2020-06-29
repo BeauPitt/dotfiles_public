@@ -21,14 +21,14 @@ for_window [class="^.*"] border none
 
 #wallpaper
 # exec_always --no-startup-id feh --bg-scale ~/Images/wallpaper.png
-exec_always --no-startup-id feh --bg-scale ~/Images/wallpapers/background.png
+exec_always --no-startup-id feh --bg-scale ~/Images/wallpapers/32206.jpg
 
 # redshift
 exec    --no-startup-id redshift -t 6500:3000
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango: IBM PLex Mono Bold 11
+font pango: IBM PLex Mono Medium 12
 
 for_window [window_role="pop-up"] floating enable
 # Before i3 v4.8, we used to recommend this one as the default:
@@ -44,7 +44,7 @@ floating_modifier $mod
 # Steam
 # https://github.com/ValveSoftware/steam-for-linux/issues/1040
 for_window [class="^Steam$" title="^Friends$"] floating enable
-for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title="Steam - News"] floating enable 
 for_window [class="^Steam$" title=".* - Chat"] floating enable
 for_window [class="^Steam$" title="^Settings$"] floating enable
 for_window [class="^Steam$" title=".* - event started"] floating enable
@@ -191,6 +191,9 @@ bindsym $mod+underscore workspace 8
 bindsym $mod+ccedilla workspace 9
 bindsym $mod+agrave workspace 10
 
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
 # move focused container to workspace
 bindsym $mod+Shift+ampersand move container to workspace 1
 bindsym $mod+Shift+eacute move container to workspace 2
@@ -248,28 +251,36 @@ bindsym $mod+r mode "resize"
 set $black             #272822
 set $white             #F8F8F2
 set $pink              #F92672
-set $blue              #66D9EF
+set $cyan              #66D9EF
+set $blue              #5596F1
 set $green             #A6E22E
 set $orange            #FD971F
 set $yellow            #E6DB74
 set $purple            #AE81FF
 set $grey              #75715E
-set $dimgray		   #3E3D3E
-set $ochre			   #F4BF75
+set $dimgray		       #3E3D3E
+set $ochre			       #F4BF75
+set $brown             #CC8D66
 
-# class                 border  bg.    text    indicator child_border
-client.focused          $black  $black $blue  $black    $black
-#client.focused          $black  $black $green  $black    $grey
-client.focused_inactive $black  $black $yellow   $black    $black
-client.unfocused        $black  $black $white  $black    $black
+# class                 border  bg.      text   indicator child_border
+client.focused          $cyan   $cyan    $black $cyan     $cyan
+client.focused_inactive $dimgray  $dimgray    $white $dimgray  $dimgray
+client.urgent           $pink  $pink    $white $pink     $pink
+client.unfocused        $dimgray  $dimgray $grey $black    $black
+client.placeholder      $black  $black   $white $black    $black
 
-## class                 border  bg.    text    indicator child_border
-#client.focused          $black  $white $black  $black    $black
-#client.focused_inactive $black  $black $white   $black    $black
-#client.unfocused        $black  $dimgray $white  $black    $black
+client.background       $white
+
+## class                 border  backgr. text    indicator child_border
+#client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+#client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+#client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+#client.urgent           #2f343a #900000 #ffffff #900000   #900000
+#client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+#client.background       #ffffff
 
 client.background       $pink
-##client.background       #ff0000
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -278,15 +289,16 @@ bar {
   #position bottom
   #tray_output primary
   #RRtray_output none
+  #status_command i3status
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
   strip_workspace_numbers yes
   colors {
     background $black
     #                  border             background         text
-    focused_workspace  $blue              $blue              $black
+    focused_workspace  $cyan              $cyan              $black
     inactive_workspace $grey              $grey              $white
     inactive_workspace $black             $black             $white
-    active_workspace   $black             $black             $blue
+    active_workspace   $black             $black             $cyan
     urgent_workspace   $pink              $pink              $black
     binding_mode       $black             $orange            $black
   }
@@ -343,9 +355,10 @@ mode "$mode_gaps" {
          bindsym Escape mode "default"
  }
 
-#gaps inner 15
+# gaps inner 15
 
-smart_gaps on
+# smart_gaps on
+smart_gaps inverse_outer
 
 exec --no-startup-id compton -f
 

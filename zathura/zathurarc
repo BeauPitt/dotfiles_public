@@ -31,5 +31,8 @@ set completion-highlight-bg     "#66d9ef"
 set recolor-lightcolor          "#272822"
 set recolor-darkcolor           "#f5f4f1"
 
-set recolor                     "false"
-set recolor-keephue             "false"
+set recolor                     true
+# set recolor-keephue             "false"
+
+# manually
+set first-page-column 1:1
